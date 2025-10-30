@@ -6,12 +6,12 @@
 
 body {
     height: 100vh;
-    margin: 0;                 /* 去掉默认边距 */
+    margin: 0; /* 去掉默认边距 */
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../img/bg.png');
-    background-size: cover;    /* 关键：自适应铺满 */
+    background-image: url('../img/bg.jpg');
+    background-size: cover; /* 关键：自适应铺满 */
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; /* 可选：视口滚动时背景不动 */
@@ -72,6 +72,26 @@ body {
 
 .login-card button:hover {
     background: #0030a0;
+}
+
+.login-card button {
+    margin: 10px 0; /* 上下间距 10px */
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0056b3;
+    color: white;
+    cursor: pointer;
+}
+
+.login-card button:first-child {
+    margin-top: 10px; /* 登录按钮顶部间距 */
+}
+
+.login-card button:last-child {
+    margin-bottom: 10px; /* 注册按钮底部间距 */
 }
 
 .logo {

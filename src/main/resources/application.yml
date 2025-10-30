@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   thymeleaf:
-    cache: true
+    cache: false
     check-template: true
     check-template-location: true
     enabled: true
@@ -19,3 +19,13 @@ spring:
     password: deepcare
     url: jdbc:mysql://172.26.179.90:3306/deepcare?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
 
+mybatis-plus:
+  configuration:
+    # MyBatis 原生配置
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      # MyBatis Plus 命名策略
+      table-underline: false
+      column-underline: false
+      id-type: auto

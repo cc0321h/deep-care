@@ -3,18 +3,26 @@
 <head>
     <meta charset="utf-8">
     <title>AI家庭医生 - 登录</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/login.css">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
 <div class="login-card">
     <div class="logo"></div>
     <h1>AI家庭医生</h1>
-    <p class="sub-title">您好！欢迎登录医疗后台管理系统</p >
+    <p class="sub-title">您好！欢迎登录医疗后台管理系统</p>
     <form id="loginForm">
-        <input type="text" placeholder="请输入用户名/手机号">
-        <input type="password" placeholder="请输入密码">
-        <button>登录</button>
+        <label>
+            <input placeholder="请输入用户名/手机号" type="text">
+        </label>
+        <label>
+            <input placeholder="请输入密码" type="password">
+        </label>
+        <button type="submit">登录</button>
+        <button type="button">注册</button>
+        <div class="forget-password">
+            <a href="#">忘记密码？</a>
+        </div>
     </form>
 </div>
 

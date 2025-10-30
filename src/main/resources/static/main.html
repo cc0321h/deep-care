@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>主页</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="css/main.css" rel="stylesheet">
+    <style>
+        /* 分页控件样式 */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .page-numbers {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .page-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: white;
+            color: #333;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover:not(:disabled) {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .page-btn.active {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+        
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-ellipsis {
+            margin: 0 5px;
+            color: #666;
+        }
+        
+        .page-size-select {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background-color: white;
+        }
+        
+        /* 确保响应式布局 */
+        @media (max-width: 768px) {
+            .pagination {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .pagination-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <a class="logo" href="">DeepCare智能医疗</a>
+    <div class="user-info"><a href="#">用户名1234</a></div>
+</header>
+
+<div class="body-wrap">
+    <ul class="nav-links">
+        <!-- 关键：加 data-page 告诉 JS 要加载哪一页 -->
+        <li><a data-page="home">首页</a></li>
+        <li><a data-page="record">问诊记录</a></li>
+        <li><a data-page="health">健康档案</a></li>
+        <li><a data-page="vital">生理指标</a></li>
+        <li><a data-page="pill">药品库</a></li>
+        <li><a data-page="rx">处方记录</a></li>
+        <li><a data-page="setting">设置</a></li>
+        <li><a data-page="ai">影像分析</a></li>
+        <li><a href="ai.html">AI家庭医生</a></li>
+    </ul>
+
+    <main class="main" id="mainPanel">
+        <!-- 首页 -->
+        <div class="page-content" id="page-home">
+            <h2>DeepCare 医疗大数据中心</h2>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>个人信息</h3>
+                    <ul id="userSummary">
+                        <li>加载中...</li>
+                    </ul>
+                    <a class="link" href="#">查看完整档案 →</a>
+                </div>
+
+                <div class="card">
+                    <h3>快捷入口</h3>
+                    <div class="quick-links">
+                        <button class="btn">药品库</button>
+                        <button class="btn">健康档案</button>
+                        <button class="btn">AI家庭医生</button>
+                        <button class="btn">体检预约</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>医疗大数据概览</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="value">12,345</div>
+                        <div class="label">本月问诊量</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">9,876</div>
+                        <div class="label">药品品种</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">98.5%</div>
+                        <div class="label">诊断准确率</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="value">24h</div>
+                        <div class="label">平均响应</div>
+                    </div>
+                </div>
+                <a class="link" href="#">查看详情 →</a>
+            </div>
+
+            <div class="card">
+                <h3>医疗新闻</h3>
+                <ul class="news-list">
+                    <li><a href="#">国家医保局：新一轮医保目录调整启动</a></li>
+                    <li><a href="#">AI辅助诊断系统在三甲医院落地</a></li>
+                    <li><a href="#">流感高发季，专家提醒尽早接种疫苗</a></li>
+                    <li><a href="#">中医药临床疗效评价三十年学术大会举行 发布多项重磅举措</a></li>
+                    <li><a href="#">国家药监局将5种牙膏检验方法纳入安全技术规范</a></li>
+                </ul>
+                <a class="link" href="#">更多新闻 →</a>
+            </div>
+        </div>
+
+        <!-- 问诊记录 -->
+        <div class="page-content" id="page-record" style="display:none;">
+            <h2>问诊记录</h2>
+
+            <div class="search-bar">
+                <input class="search-input" placeholder="输入姓名搜索" type="text" id="searchName">
+                <button class="btn" id="btnSearchConsultation">搜索</button>
+                <button class="btn" id="btnShowAllConsultation">显示全部</button>
+                <button class="btn btn-primary" id="btnAddConsultation">添加问诊记录</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>姓名</th>
+                    <th>症状描述</th>
+                    <th>AI诊断</th>
+                    <th>医生意见</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                <!-- 等待后端数据加载完成后，这里会动态填充数据 -->
+                
+                </tbody>
+            </table>
+            
+            <!-- 分页控件 -->
+            <div class="pagination" id="pagination">
+                <div class="pagination-info">
+                    <span id="pageInfo">显示 0-0 条，共 0 条</span>
+                </div>
+                <div class="pagination-controls">
+                    <button id="prevPage" class="btn" disabled>上一页</button>
+                    <div id="pageNumbers" class="page-numbers">
+                        <!-- 页码按钮将在这里动态生成 -->
+                    </div>
+                    <button id="nextPage" class="btn" disabled>下一页</button>
+                    <select id="pageSizeSelect" class="page-size-select">
+                        <option value="10">10条/页</option>
+                        <option value="20">20条/页</option>
+                        <option value="50">50条/页</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 健康档案 -->
+        <div class="page-content" id="page-health" style="display:none;">
+            <h2>健康档案</h2>
+
+            <div class="card">
+                <h3>基本信息</h3>
+                <div class="form-group">
+                    <label>姓名：</label>
+                    <span>张三</span>
+                </div>
+                <div class="form-group">
+                    <label>性别：</label>
+                    <span>男</span>
+                </div>
+                <div class="form-group">
+                    <label>年龄：</label>
+                    <span>45岁</span>
+                </div>
+                <div class="form-group">
+                    <label>联系方式：</label>
+                    <span>138****1234</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>既往病史</h3>
+                <ul class="list">
+                    <li>高血压（2020年确诊）</li>
+                    <li>糖尿病（2022年确诊）</li>
+                    <li>过敏史：青霉素过敏</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>家族病史</h3>
+                <ul class="list">
+                    <li>父亲：冠心病</li>
+                    <li>母亲：糖尿病</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 生理指标 -->
+        <div class="page-content" id="page-vital" style="display:none;">
+            <h2>生理指标</h2>
+
+            <div class="chart-container">
+                <canvas id="vitalChart"></canvas>
+            </div>
+
+            <div class="card">
+                <h3>最近测量值</h3>
+                <table class="data-table">
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>血压</th>
+                        <th>血糖</th>
+                        <th>心率</th>
+                        <th>体温</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>2025-10-21</td>
+                        <td>130/85 mmHg</td>
+                        <td>6.2 mmol/L</td>
+                        <td>78 bpm</td>
+                        <td>36.5°C</td>
+                    </tr>
+                    <tr>
+                        <td>2025-10-20</td>
+                        <td>132/86 mmHg</td>
+                        <td>6.1 mmol/L</td>
+                        <td>76 bpm</td>
+                        <td>36.4°C</td>
+                    </tr>
+                    <tr>
+                        <td>2025-10-19</td>
+                        <td>131/84 mmHg</td>
+                        <td>6.0 mmol/L</td>
+                        <td>77 bpm</td>
+                        <td>36.3°C</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 药品库 -->
+        <div class="page-content" id="page-pill" style="display:none;">
+            <h2>药品库</h2>
+
+            <div class="search-bar">
+                <input class="search-input" placeholder="输入药品名搜索" type="text" id="searchMedicine">
+                <button class="btn" id="btnSearchMedicine">搜索</button>
+                <button class="btn" id="btnShowAllMedicine">显示全部</button>
+                <button class="btn btn-primary" id="btnAddMedicine">添加药品</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>药品ID</th>
+                    <th>通用名</th>
+                    <th>适应症</th>
+                    <th>禁忌症</th>
+                    <th>用法用量</th>
+                    <th>相互作用</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="medicineTableBody">
+                <!-- 等待后端数据加载完成后，这里会动态填充数据 -->
+                </tbody>
+            </table>
+            
+            <!-- 分页控件 -->
+            <div class="pagination" id="medicinePagination">
+                <div class="pagination-info">
+                    <span id="medicinePageInfo">显示 0-0 条，共 0 条</span>
+                </div>
+                <div class="pagination-controls">
+                    <button id="medicinePrevPage" class="btn" disabled>上一页</button>
+                    <div id="medicinePageNumbers" class="page-numbers">
+                        <!-- 页码按钮将在这里动态生成 -->
+                    </div>
+                    <button id="medicineNextPage" class="btn" disabled>下一页</button>
+                    <select id="medicinePageSizeSelect" class="page-size-select">
+                        <option value="10">10条/页</option>
+                        <option value="20">20条/页</option>
+                        <option value="50">50条/页</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 处方记录 -->
+        <div class="page-content" id="page-rx" style="display:none;">
+            <h2>处方记录</h2>
+
+            <div class="search-bar">
+                <input class="search-input" placeholder="输入患者姓名搜索" type="text">
+                <button class="btn">搜索</button>
+                <button class="btn">显示全部</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>处方编号</th>
+                    <th>患者姓名</th>
+                    <th>开方医生</th>
+                    <th>开方时间</th>
+                    <th>药品数量</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>RX20251021001</td>
+                    <td>陈建国</td>
+                    <td>李医生</td>
+                    <td>2025-10-21</td>
+                    <td>3</td>
+                    <td>已取药</td>
+                </tr>
+                <tr>
+                    <td>RX20251020002</td>
+                    <td>王雪梅</td>
+                    <td>张医生</td>
+                    <td>2025-10-20</td>
+                    <td>2</td>
+                    <td>已取药</td>
+                </tr>
+                <tr>
+                    <td>RX20251019003</td>
+                    <td>李浩然</td>
+                    <td>王医生</td>
+                    <td>2025-10-19</td>
+                    <td>4</td>
+                    <td>已取药</td>
+                </tr>
+                <tr>
+                    <td>RX20251018004</td>
+                    <td>赵秀英</td>
+                    <td>刘医生</td>
+                    <td>2025-10-18</td>
+                    <td>3</td>
+                    <td>已取药</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 设置 -->
+        <div class="page-content" id="page-setting" style="display:none;">
+            <h2>设置</h2>
+
+            <div class="card">
+                <h3>个人信息</h3>
+                <div class="form-group">
+                    <label>用户名：</label>
+                    <input type="text" value="用户名1234">
+                </div>
+                <div class="form-group">
+                    <label>手机号：</label>
+                    <input type="text" value="138****1234">
+                </div>
+                <div class="form-group">
+                    <label>邮箱：</label>
+                    <input type="email" value="user@example.com">
+                </div>
+                <button class="btn">保存设置</button>
+            </div>
+
+            <div class="card">
+                <h3>隐私设置</h3>
+                <div class="form-group">
+                    <label>允许数据共享：</label>
+                    <input checked type="checkbox">
+                </div>
+                <div class="form-group">
+                    <label>接收推送通知：</label>
+                    <input checked type="checkbox">
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>安全设置</h3>
+                <button class="btn">修改密码</button>
+                <button class="btn">绑定手机</button>
+                <button class="btn">退出登录</button>
+            </div>
+        </div>
+
+        <!-- 影像分析 -->
+        <div class="page-content" id="page-ai" style="display:none;">
+            <h2>影像分析</h2>
+
+            <div class="card">
+                <h3>上传影像</h3>
+                <div class="upload-area">
+                    <p>点击或拖拽文件到此处上传</p>
+                    <button class="btn">选择文件</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>分析结果</h3>
+                <div class="analysis-result">
+                    <p><strong>检测类型：</strong>胸部CT</p>
+                    <p><strong>分析结果：</strong>发现肺部结节，建议进一步检查</p>
+                    <p><strong>置信度：</strong>95%</p>
+                    <p><strong>建议：</strong>建议进行PET-CT检查以明确性质</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- 确保 JavaScript 在 body 结束前加载 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 获取所有带有 data-page 属性的导航链接
+        const navLinks = document.querySelectorAll('.nav-links a[data-page]');
+
+        // 为每个链接添加点击事件监听器
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // 阻止默认链接行为
+
+                // 获取要显示的页面ID
+                const pageId = this.getAttribute('data-page');
+                const targetPage = document.getElementById('page-' + pageId);
+
+                // 隐藏所有页面
+                document.querySelectorAll('.page-content').forEach(p => {
+                    p.style.display = 'none';
+                });
+
+                // 显示目标页面
+                if (targetPage) {
+                    targetPage.style.display = 'block';
+                }
+            });
+        });
+        // 2. 自动加载首页数据（用户登录后）
+        loadHomeData(); // ← 新增这行代码
+    });
+
+    async function loadHomeData() {
+        const loginUser = localStorage.getItem('loginUser');
+        console.log('获取用户名:' + loginUser);
+
+        // 更新右上角用户名
+        const userInfoLink = document.querySelector('.user-info a');
+        if (userInfoLink) {
+            userInfoLink.textContent = loginUser || '未登录';
+        }
+    }
+</script>
+
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
+

@@ -1,8 +1,8 @@
-package org.example.deepai.DTO;
+package org.example.deepai.dto;
 
 public class UserLoginDTO {
     private String username;
-    private String passwd;
+    private String password;
     
     public String getUsername() {
         return username;
@@ -10,11 +10,11 @@ public class UserLoginDTO {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getPasswd() {
-        return passwd;
+    public String getpassword() {
+        return password;
     }
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setpassword(String password) {
+        this.password = password;
     }
     
 }

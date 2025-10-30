@@ -1,6 +1,10 @@
 package org.example.deepai.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class User {
+    @TableId(type = IdType.AUTO)
     public Integer id; 
     public String username; 
     public String password; 
